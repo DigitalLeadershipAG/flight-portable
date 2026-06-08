@@ -58,6 +58,32 @@ Der Upload von Skills passiert in Desktop über die Oberfläche — das kann kei
 3. `~/mein-flight-ordner` mit Claude Desktop verbinden (Project Folder).
 4. Den Inhalt von `~/mein-flight-ordner/.claude/agents/pilot.md` einmalig in die **Projekt-Instruktionen** kopieren, damit Claude sich wie „pilot" verhält.
 
+## Team-Setup über Dropbox (geteilter Ordner)
+
+Flight speichert alles als Dateien im verbundenen Ordner. Liegt dieser in **Dropbox**, teilt sich das ganze Team automatisch Aufgaben, Memos, Sitzungsverlauf und erzeugte Dokumente.
+
+**Einmal einrichten (eine Person):**
+1. Einen Dropbox-synchronisierten Ordner als gemeinsamen Arbeitsordner wählen.
+2. Flight dort hinein installieren:
+   ```bash
+   ./flight-portable/install.sh ~/Dropbox/unser-flight-ordner
+   ```
+   Das legt `.claude/` (Skills + Agent + Befehle) **und** den Ordner `flight-desktop-skills/` (die 7 ZIPs) im Ordner ab — beides synct zu allen Kollegen.
+
+**Jeder Kollege:**
+- **Cowork:** den synchronisierten Ordner in Cowork verbinden — die Skills sind durch die Dropbox-Sync schon da, **keine eigene Installation nötig**. Einfach mit Claude reden.
+- **Desktop:** die 7 ZIPs aus `…/flight-desktop-skills/` einmal hochladen (Skills syncen in Desktop **nicht** über Dropbox).
+
+**Was geteilt wird:** `flight-workbench/memos/` (Aufgaben/Memos), `flight-workbench/history/` (Sitzungsverläufe), `flight-workbench/decisions/` und alle erzeugten Dokumente im Ordner.
+
+**Hinweise:**
+- Aufgaben sind **pro Person** getrennt (`tasks-<name>.md`) — jeder sieht alle, jeder pflegt seine eigene. Das minimiert Dropbox-Konflikte.
+- Vermeidet, **dieselbe** Datei *gleichzeitig* zu bearbeiten — sonst legt Dropbox „conflicted copy"-Versionen an.
+- Achtet darauf, dass der Ordner lokal **verfügbar** ist (nicht „nur online" / Smart Sync), sonst findet Cowork die Skills evtl. nicht.
+- `CLAUDE.md` (Sprache + Konventionen) wird mitgeteilt — passt für ein Team.
+
+> Noch nicht in Cowork verifiziert: dass synchronisierte `.claude/`-Skills bei einem Kollegen ohne eigene Installation greifen. Bitte einmal mit einer zweiten Person testen.
+
 ## So testest du, dass es läuft
 
 Sag zu Claude: **„merke dir: Testaufgabe XY"**. Danach im Ordner prüfen:
