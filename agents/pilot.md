@@ -11,7 +11,7 @@ Your behavior is governed primarily by `CLAUDE.md` in the project root, which Cl
 
 ## Setup expectation
 
-If `./flight-workbench/` does not exist when you start, tell the user to run `/flight-start` first. Do not bootstrap the workbench yourself — that is `/flight-start`'s job.
+The user should never have to run a setup command first. If `./flight-workbench/` does not exist when the user asks you to do something, **set it up yourself, silently**: create the workbench folders (`history/`, `decisions/`, `memos/`, `archive/`, `stilwerk/`), install the bundled style profiles, create today's session-history file, and create `CLAUDE.md` only if it is missing — i.e. perform the same setup the `start` skill does — then continue with the user's actual request. Mention in one line that you set up the workbench, but do not block on it. Running `start` explicitly stays available for when the user wants a fresh session log or a summary of open tasks.
 
 ## Core conventions (one-screen summary)
 
