@@ -3,17 +3,27 @@ set -euo pipefail
 
 # install.sh — set up flight-portable in a connected folder (Cowork / Claude Code)
 # and prepare the Desktop skill ZIPs.
-#   Cowork/CLI:  curl -fsSL <raw-install.sh-url> | bash -s -- /path/to/connected/folder
-#   (no arg → installs into the current directory)
+#   Private repo (recommended):  gh repo clone DigitalLeadershipAG/flight-portable
+#                                ./flight-portable/install.sh /path/to/connected/folder
+#   Public tarball (only if the repo is public):
+#                                curl -fsSL <raw-install.sh-url> | bash -s -- /path/to/folder
+#   (no folder arg → installs into the current directory)
 
-FORK_TARBALL_URL="https://github.com/REPLACE-ME/flight-portable/archive/refs/heads/portable.tar.gz"
+FORK_TARBALL_URL="https://github.com/DigitalLeadershipAG/flight-portable/archive/refs/heads/portable.tar.gz"
 TARGET="${1:-$PWD}"
 
 say() { printf '\033[1m%s\033[0m\n' "$*"; }
 
-# 1. Resolve source: local checkout (for tests/dev) or download.
+# 1. Resolve source, in order of preference:
+#    a) FLIGHT_PORTABLE_SRC env (tests/dev)
+#    b) the repo this script lives in (run as ./install.sh from a clone — no network, works for private repos)
+#    c) download the tarball (only works for a public repo)
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" 2>/dev/null && pwd || echo '')"
 if [ -n "${FLIGHT_PORTABLE_SRC:-}" ] && [ -d "$FLIGHT_PORTABLE_SRC/skills" ]; then
   SRC="$FLIGHT_PORTABLE_SRC"
+  CLEANUP=""
+elif [ -n "$SCRIPT_DIR" ] && [ -d "$SCRIPT_DIR/skills" ]; then
+  SRC="$SCRIPT_DIR"
   CLEANUP=""
 else
   TMP="$(mktemp -d)"; CLEANUP="$TMP"

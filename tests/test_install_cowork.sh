@@ -14,4 +14,10 @@ FLIGHT_PORTABLE_SRC="$ROOT" bash "$ROOT/install.sh" "$TMP" >/dev/null
 echo "USER EDIT" >> "$TMP/CLAUDE.md"
 FLIGHT_PORTABLE_SRC="$ROOT" bash "$ROOT/install.sh" "$TMP" >/dev/null
 grep -q "USER EDIT" "$TMP/CLAUDE.md" || fail "install clobbered existing CLAUDE.md"
+
+# Clone-local mode: no FLIGHT_PORTABLE_SRC, no network — install.sh must detect its own repo (private-repo path).
+TMP2="$(mktemp -d)"; trap 'rm -rf "$TMP" "$TMP2"' EXIT
+bash "$ROOT/install.sh" "$TMP2" >/dev/null
+[ -f "$TMP2/.claude/skills/start/SKILL.md" ]   || fail "clone-local source detection failed (skills)"
+[ -f "$TMP2/.claude/commands/flight-start.md" ] || fail "clone-local source detection failed (commands)"
 echo "PASS"

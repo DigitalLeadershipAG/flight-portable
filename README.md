@@ -28,17 +28,21 @@ Its single AI agent is named **pilot**. Everything flight tracks is plain files 
 
 ## Quick start
 
-**Claude Code & Cowork — one command.** Connect/open the folder you want to work in, then:
+This is a **private** repo, so install by cloning (needs [`gh`](https://cli.github.com/) and DigitalLeadershipAG org access). Once per machine — adjust the folder path:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/REPLACE-ME/flight-portable/portable/install.sh | bash -s -- /path/to/your/folder
+gh repo clone DigitalLeadershipAG/flight-portable
+./flight-portable/install.sh /path/to/your/folder
 ```
 
 This copies the skills into `<folder>/.claude/skills/`, the pilot agent into `<folder>/.claude/agents/`, the slash-command wrappers into `<folder>/.claude/commands/`, creates `CLAUDE.md` (only if missing — your edits are never overwritten), and prepares the Desktop ZIPs in `<folder>/flight-desktop-skills/`. Then just ask Claude to "start flight" (in Claude Code you can also type `/flight-start`).
 
-**Claude Desktop — one command + upload.** Run the same command, then upload the 7 ZIPs from `flight-desktop-skills/` in Settings → Capabilities → Skills. Full steps in [INSTALL.md](INSTALL.md).
+- **Cowork:** connect the folder, then talk to Claude in natural language (no slash commands).
+- **Claude Desktop:** upload the 7 ZIPs from `flight-desktop-skills/` in Settings → Capabilities → Skills.
 
-> Replace `REPLACE-ME` in the URL with this fork's GitHub org/user before sharing the command.
+Full step-by-step guide: **[INSTALL.md](INSTALL.md)**.
+
+> If the repo is later made public, the one-liner `curl -fsSL https://raw.githubusercontent.com/DigitalLeadershipAG/flight-portable/portable/install.sh | bash -s -- /path/to/folder` also works.
 
 ## The seven skills
 
