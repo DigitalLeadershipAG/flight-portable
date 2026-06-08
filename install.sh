@@ -1,15 +1,17 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# install.sh — set up flight-portable in a connected folder (Cowork / Claude Code)
-# and prepare the Desktop skill ZIPs.
-#   Private repo (recommended):  gh repo clone DigitalLeadershipAG/flight-portable
-#                                ./flight-portable/install.sh /path/to/connected/folder
-#   Public tarball (only if the repo is public):
-#                                curl -fsSL <raw-install.sh-url> | bash -s -- /path/to/folder
+# install.sh — set up flight-portable for Cowork / Claude Code, and prepare Desktop ZIPs.
+#   Per folder (default):  ./flight-portable/install.sh /path/to/connected/folder
+#   Global (all projects): ./flight-portable/install.sh --global
+#       → installs into ~/.claude/ so flight is available in EVERY Cowork/Claude Code project.
+#         The flight-workbench/ (memos etc.) is still created per connected folder at runtime.
 #   (no folder arg → installs into the current directory)
 
 FORK_TARBALL_URL="https://github.com/DigitalLeadershipAG/flight-portable/archive/refs/heads/portable.tar.gz"
+
+GLOBAL=0
+if [ "${1:-}" = "--global" ]; then GLOBAL=1; shift; fi
 TARGET="${1:-$PWD}"
 
 say() { printf '\033[1m%s\033[0m\n' "$*"; }
@@ -32,6 +34,25 @@ else
   SRC="$(find "$TMP" -maxdepth 1 -type d -name 'flight-portable*' | head -1)"
 fi
 [ -d "$SRC/skills" ] || { echo "ERROR: source has no skills/ — bad download?"; exit 1; }
+
+# 1b. Global mode — install into ~/.claude/ so flight is available in all projects.
+if [ "$GLOBAL" = "1" ]; then
+  DEST="$HOME/.claude"
+  say "Installing flight GLOBALLY into: $DEST (available in all Cowork / Claude Code projects)"
+  mkdir -p "$DEST/skills" "$DEST/agents"
+  cp -R "$SRC"/skills/* "$DEST/skills/"
+  cp "$SRC/agents/pilot.md" "$DEST/agents/"
+  if [ -d "$SRC/commands" ]; then
+    mkdir -p "$DEST/commands"
+    cp "$SRC"/commands/*.md "$DEST/commands/"
+  fi
+  echo "  • Skills, pilot agent and commands installed globally."
+  echo "  • No global CLAUDE.md changed; no Desktop ZIPs (those are per-folder)."
+  echo "  • The flight-workbench/ is created in whichever folder you connect, when you start flight."
+  if [ -n "$CLEANUP" ]; then rm -rf "$CLEANUP"; fi
+  say "Done. In any project: connect a folder and ask Claude to 'start flight'."
+  exit 0
+fi
 
 # 2. Cowork / CLI track — copy into the connected folder's .claude/.
 say "Installing flight into: $TARGET"

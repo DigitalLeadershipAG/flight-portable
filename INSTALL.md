@@ -34,6 +34,16 @@ gh repo clone DigitalLeadershipAG/flight-portable
 Ist das Repo später öffentlich, geht auch der Einzeiler `curl -fsSL https://raw.githubusercontent.com/DigitalLeadershipAG/flight-portable/portable/install.sh | bash -s -- ~/mein-flight-ordner`.
 </details>
 
+### Flight in allen Cowork-Ordnern (global, optional)
+
+Standardmäßig gilt Flight nur in dem Ordner, in den du installiert hast. Willst du Flight in **jedem** Cowork-/Claude-Code-Projekt automatisch haben, installiere einmal global:
+
+```bash
+./flight-portable/install.sh --global
+```
+
+Das legt die Skills, den Agenten und die Befehle in `~/.claude/` ab. Danach ist Flight überall verfügbar; den `flight-workbench/` legt es weiterhin **pro verbundenem Ordner** an, sobald du „start flight" sagst. (Im globalen Modus werden keine Desktop-ZIPs erzeugt — Desktop läuft über den Upload-Weg.)
+
 ## Claude Cowork
 
 1. In Cowork ein Projekt anlegen und `~/mein-flight-ordner` verbinden.

@@ -39,6 +39,7 @@ This copies the skills into `<folder>/.claude/skills/`, the pilot agent into `<f
 
 - **Cowork:** connect the folder, then talk to Claude in natural language (no slash commands).
 - **Claude Desktop:** upload the 7 ZIPs from `flight-desktop-skills/` in Settings → Capabilities → Skills.
+- **All projects at once:** `./flight-portable/install.sh --global` installs into `~/.claude/`, making flight available in every Cowork/Claude Code project (the workbench is still created per connected folder).
 
 Full step-by-step guide: **[INSTALL.md](INSTALL.md)**.
 
