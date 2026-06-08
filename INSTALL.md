@@ -17,7 +17,7 @@ Flight ist dein Arbeits-Begleiter: Aufgaben merken, Memos festhalten, Dokumente 
    curl -fsSL https://raw.githubusercontent.com/REPLACE-ME/flight-portable/portable/install.sh | bash -s -- ~/mein-flight-ordner
    ```
 
-3. Fertig. In Cowork `/flight:start` aufrufen (oder Claude einfach bitten: „start flight") — Flight legt `flight-workbench/` im Ordner an und ist bereit.
+3. Fertig. In Cowork tippst du **keine Slash-Befehle** — bitte Claude einfach in normaler Sprache: „**richte flight hier ein**" oder „**start flight**". Der passende Skill löst automatisch aus und legt `flight-workbench/` im Ordner an. (Echte `/flight-…`-Slash-Befehle gibt es nur in Claude Code / CLI.)
 
 ## Claude Desktop (ein Befehl + Hochladen)
 
@@ -42,5 +42,5 @@ Die Zeile mit „Testaufgabe XY" muss da stehen — und nach Schließen/Öffnen 
 
 - **Skills ausgegraut:** Code-Ausführung ist aus → in Capabilities aktivieren (bei Team/Enterprise ggf. Admin).
 - **Memos verschwinden:** Es wurde nicht im verbundenen Ordner gearbeitet → Ordner verbinden, Befehl mit korrektem Pfad erneut ausführen.
-- **Keine `/flight:`-Befehle in Desktop:** Das ist normal — in Desktop lösen die Skills automatisch über ihre Beschreibung aus, statt per Slash-Befehl.
+- **Keine `/flight-`-Befehle in Cowork/Desktop:** Das ist normal — dort lösen die Skills automatisch über ihre Beschreibung aus. Sprich Claude einfach an („merke dir …", „räum die Aufgaben auf"). Slash-Befehle gibt es nur in Claude Code (CLI).
 - **Updates holen (für Maintainer):** `git fetch upstream && git merge upstream/main` im Fork.

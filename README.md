@@ -34,7 +34,7 @@ Its single AI agent is named **pilot**. Everything flight tracks is plain files 
 curl -fsSL https://raw.githubusercontent.com/REPLACE-ME/flight-portable/portable/install.sh | bash -s -- /path/to/your/folder
 ```
 
-This copies the skills into `<folder>/.claude/skills/`, the pilot agent into `<folder>/.claude/agents/`, creates `CLAUDE.md` (only if missing — your edits are never overwritten), and prepares the Desktop ZIPs in `<folder>/flight-desktop-skills/`. Then trigger `/flight:start` (or just ask Claude to "start flight").
+This copies the skills into `<folder>/.claude/skills/`, the pilot agent into `<folder>/.claude/agents/`, the slash-command wrappers into `<folder>/.claude/commands/`, creates `CLAUDE.md` (only if missing — your edits are never overwritten), and prepares the Desktop ZIPs in `<folder>/flight-desktop-skills/`. Then just ask Claude to "start flight" (in Claude Code you can also type `/flight-start`).
 
 **Claude Desktop — one command + upload.** Run the same command, then upload the 7 ZIPs from `flight-desktop-skills/` in Settings → Capabilities → Skills. Full steps in [INSTALL.md](INSTALL.md).
 
@@ -42,7 +42,7 @@ This copies the skills into `<folder>/.claude/skills/`, the pilot agent into `<f
 
 ## The seven skills
 
-In Claude Code and Cowork these are slash commands (`/flight:start`); in Claude Desktop they trigger automatically from their description (no slash commands there).
+In **Claude Code (CLI)** these are real slash commands (`/flight-start`, `/flight-memo`, …). In **Cowork and Claude Desktop** there are no slash commands — the skills trigger automatically from their description, so you just describe what you want ("merke dir …", "start flight").
 
 | Skill | What it does |
 |---|---|
