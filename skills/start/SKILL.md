@@ -17,13 +17,11 @@ pwd
 
 Report the path to the user. The workbench will be created at `./flight-workbench/` relative to this directory. If the user wanted to start in a different folder, they should cancel and `cd` there first.
 
-## Step 1 — Locate the flight plugin's source files
+## Step 1 — Locate the bundled style profiles
 
-This skill needs to copy the style profiles from the plugin's `stilwerk/` directory into the project's workbench — four files: the professional-voice pair (`professional-voice-en.yaml`, `professional-voice-de.yaml`) and the chat-voice pair (`chat-voice-en.yaml`, `chat-voice-de.yaml`).
+The four style profiles ship **inside this skill** at `<skill-dir>/stilwerk/`. Claude provides this skill's own directory at invocation (look for "Base directory for this skill:" in this prompt's context). Use that directory directly — there is no separate plugin install to locate. The four files are `professional-voice-en.yaml`, `professional-voice-de.yaml`, `chat-voice-en.yaml`, `chat-voice-de.yaml`.
 
-The plugin's base directory for this skill is provided by Claude Code at invocation time (look for the line "Base directory for this skill:" in this prompt's context). From that path, the plugin root is `dirname(dirname(base_dir))` — strip the trailing `/skills/start`. The stilwerk source files are at `<plugin-root>/stilwerk/`.
-
-If you cannot determine the plugin root, fall back to: try `$FLIGHT_PLUGIN_ROOT/stilwerk/`; if unset, search `~/.claude/plugins/cache/tenzoki-plugins/flight/*/stilwerk/` and pick the newest version. If all three fail, warn the user that the style profiles could not be installed; the workbench is still usable, but `/flight:start` should be re-run from a properly installed plugin to get the profiles.
+If you cannot determine the skill directory, warn the user that the style profiles could not be installed; the workbench is still usable and `/flight:memo`, history, etc. all work — only the stylometric polish is missing until `/flight:start` is re-run.
 
 ## Step 2 — Create the workbench
 
@@ -35,30 +33,30 @@ mkdir -p ./flight-workbench/history ./flight-workbench/decisions ./flight-workbe
 
 ## Step 3 — Install the style profiles
 
-Copy all four YAML profiles from `<plugin-root>/stilwerk/` into `./flight-workbench/stilwerk/`. Always overwrite — the source-of-truth is the plugin version, so a refresh on /flight:start re-installs the latest. Use:
+Copy all four YAML profiles from `<skill-dir>/stilwerk/` into `./flight-workbench/stilwerk/`. Always overwrite — the source-of-truth is the bundled skill version, so a refresh on /flight:start re-installs the latest. Use:
 
 ```bash
-cp "<plugin-root>/stilwerk/professional-voice-en.yaml" ./flight-workbench/stilwerk/
-cp "<plugin-root>/stilwerk/professional-voice-de.yaml" ./flight-workbench/stilwerk/
-cp "<plugin-root>/stilwerk/chat-voice-en.yaml" ./flight-workbench/stilwerk/
-cp "<plugin-root>/stilwerk/chat-voice-de.yaml" ./flight-workbench/stilwerk/
+cp "<skill-dir>/stilwerk/professional-voice-en.yaml" ./flight-workbench/stilwerk/
+cp "<skill-dir>/stilwerk/professional-voice-de.yaml" ./flight-workbench/stilwerk/
+cp "<skill-dir>/stilwerk/chat-voice-en.yaml" ./flight-workbench/stilwerk/
+cp "<skill-dir>/stilwerk/chat-voice-de.yaml" ./flight-workbench/stilwerk/
 ```
 
-Replace `<plugin-root>` with the path resolved in Step 1. After the copy, list `./flight-workbench/stilwerk/` and confirm all four profiles are present.
+Replace `<skill-dir>` with the path resolved in Step 1. After the copy, list `./flight-workbench/stilwerk/` and confirm all four profiles are present.
 
 ## Step 4 — Write the setup marker
 
 ```bash
-printf '{"setup_at":"%s","setup_pwd":"%s","plugin_version":"%s"}\n' "$(date +%Y-%m-%dT%H:%M:%S%z)" "$(pwd -P)" "$(grep '"version"' "<plugin-root>/.claude-plugin/plugin.json" | head -1 | sed -E 's/.*"version": *"([^"]+)".*/\1/')" > ./flight-workbench/.flight-setup
+printf '{"setup_at":"%s","setup_pwd":"%s","flight":"portable"}\n' "$(date +%Y-%m-%dT%H:%M:%S%z)" "$(pwd -P)" > ./flight-workbench/.flight-setup
 ```
 
-The plugin version is read from `<plugin-root>/.claude-plugin/plugin.json` so the marker always reflects what version of flight set up this project. Replace `<plugin-root>` with the path resolved in Step 1. Harmless to overwrite on re-runs.
+Harmless to overwrite on re-runs.
 
 ## Step 5 — Initialize CLAUDE.md (only if missing)
 
 Check if `./CLAUDE.md` exists.
 
-**If it does NOT exist:** copy the template from the plugin at `<plugin-root>/templates/CLAUDE.md.template` to `./CLAUDE.md`. The template is the system-prompt-extension that makes the default Claude session in this project behave as flight; without it, future sessions will not know about flight's conventions.
+**If it does NOT exist:** copy the template bundled with this skill at `<skill-dir>/CLAUDE.md.template` to `./CLAUDE.md`. The template is the system-prompt-extension that makes the default Claude session in this project behave as flight; without it, future sessions will not know about flight's conventions.
 
 **If it already exists:** read it. Do NOT overwrite. The user has already curated content here. Report to the user: "Found existing CLAUDE.md — keeping it as is."
 
