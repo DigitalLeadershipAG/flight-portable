@@ -146,4 +146,14 @@ If there are no open tasks, say so explicitly and prompt for input:
 - Does not modify an existing `CLAUDE.md`.
 - Does not delete any existing files in `flight-workbench/`.
 - Does not configure git, set up hooks, or install dependencies.
+
+## Flight conventions (works without the pilot agent)
+
+In Claude Desktop there is no `pilot` agent and no auto-loaded `CLAUDE.md`, so apply these rules directly:
+
+- **Workbench location:** all flight tracking lives under `./flight-workbench/` in the connected folder — `history/`, `decisions/`, `memos/`, `archive/`, `stilwerk/`. Never put tasks or memos in `CLAUDE.md`.
+- **Memos & tasks:** open tasks → `flight-workbench/memos/tasks-<user>.md`; longer memos → `flight-workbench/memos/memos-<user>.md` (one file per OS user).
+- **Filenames:** `<prefix>-<name>.<ext>`, prefix from `date +"${FLIGHT_FILE_PREFIX:-%Y-%m-%d_%H-%M}"`. Always get timestamps by running `date` in the shell — never from your own clock (it is UTC and will be off by the local offset).
+- **Deliverables** the user asks you to produce go to the **connected folder root**, not under `flight-workbench/`.
+- **Style:** apply `flight-workbench/stilwerk/professional-voice-<LANG>.yaml` to long-form documents and `chat-voice-<LANG>.yaml` to short chat replies; if the language has no profile, read the `-en` variant and apply its intent.
 - Does not require the user to be technical — every step works without git, node, or python.

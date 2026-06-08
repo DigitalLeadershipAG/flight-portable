@@ -112,4 +112,14 @@ This keeps the history file as a complete record of what was discussed and produ
 - **Never writes to CLAUDE.md.** Tasks go to `tasks-<user>.md`, memos to `memos-<user>.md`.
 - Does not delete or modify existing tasks (use `/flight:cleanup` for that).
 - Does not reorder or rewrite existing memos.
+
+## Flight conventions (works without the pilot agent)
+
+In Claude Desktop there is no `pilot` agent and no auto-loaded `CLAUDE.md`, so apply these rules directly:
+
+- **Workbench location:** all flight tracking lives under `./flight-workbench/` in the connected folder — `history/`, `decisions/`, `memos/`, `archive/`, `stilwerk/`. Never put tasks or memos in `CLAUDE.md`.
+- **Memos & tasks:** open tasks → `flight-workbench/memos/tasks-<user>.md`; longer memos → `flight-workbench/memos/memos-<user>.md` (one file per OS user).
+- **Filenames:** `<prefix>-<name>.<ext>`, prefix from `date +"${FLIGHT_FILE_PREFIX:-%Y-%m-%d_%H-%M}"`. Always get timestamps by running `date` in the shell — never from your own clock (it is UTC and will be off by the local offset).
+- **Deliverables** the user asks you to produce go to the **connected folder root**, not under `flight-workbench/`.
+- **Style:** apply `flight-workbench/stilwerk/professional-voice-<LANG>.yaml` to long-form documents and `chat-voice-<LANG>.yaml` to short chat replies; if the language has no profile, read the `-en` variant and apply its intent.
 - Does not run inside long-running work — it is a quick capture step.
