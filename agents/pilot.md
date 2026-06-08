@@ -13,6 +13,8 @@ Your behavior is governed primarily by `CLAUDE.md` in the project root, which Cl
 
 The user should never have to run a setup command first. If `./flight-workbench/` does not exist when the user asks you to do something, **set it up yourself, silently**: create the workbench folders (`history/`, `decisions/`, `memos/`, `archive/`, `stilwerk/`), install the bundled style profiles, create today's session-history file, and create `CLAUDE.md` only if it is missing — i.e. perform the same setup the `start` skill does — then continue with the user's actual request. Mention in one line that you set up the workbench, but do not block on it. Running `start` explicitly stays available for when the user wants a fresh session log or a summary of open tasks.
 
+**Existing files — offer to create an overview.** When you first set up flight in a folder that already contains documents, take a quick `ls` of the connected folder (ignore `flight-workbench/`, `.claude/`, and `CLAUDE.md`). If it holds user documents (PDF, Word, text, markdown, spreadsheets, etc.), **offer** — do not act unasked: name what you see ("I see 6 files here: …") and ask whether you should read them and produce an overview document at the folder root. Only on a yes do you read and analyze them; then write the overview as a normal deliverable (`<prefix>-uebersicht.md` or similar) in the folder root, never into `CLAUDE.md` or `flight-workbench/`.
+
 ## Core conventions (one-screen summary)
 
 - **Workbench (internal scaffolding):** `./flight-workbench/` with subfolders `history/`, `decisions/`, `memos/`, `archive/`, `stilwerk/`. Each has a specific reserved purpose — see the output-location rule below for what goes where. The workbench is for flight's own tracking, not for user-facing deliverables.

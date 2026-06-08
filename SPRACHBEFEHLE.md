@@ -18,6 +18,7 @@ Hier die wichtigsten Formulierungen:
 - „**Archivier die alten Workbench-Dateien**" → bündelt Altes nach `flight-workbench/archive/`
 
 ## Dokumente & Analyse (das Herzstück)
+- Wenn der Ordner schon Dokumente enthält, **bietet Flight beim ersten Mal von selbst an**, einen Überblick zu erstellen — du kannst auch direkt fragen: „**Verschaff dir einen Überblick über die Dateien hier.**"
 - „**Fass dieses PDF zusammen**" · „**Lies das durch und nenn mir die Kernpunkte**"
 - „**Entwirf eine Antwort an …**" · „**Schreib mir einen Vermerk über …**"
 - „**Mach mir daraus eine PowerPoint / ein Excel / ein Word-Dokument**" (.pptx/.xlsx/.docx)

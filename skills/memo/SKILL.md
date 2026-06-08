@@ -118,6 +118,7 @@ This keeps the history file as a complete record of what was discussed and produ
 In Claude Desktop there is no `pilot` agent and no auto-loaded `CLAUDE.md`, so apply these rules directly:
 
 - **No setup step needed:** if `./flight-workbench/` does not exist yet, create its folders (and copy the bundled style profiles if present) on first use, then continue — never ask the user to run a separate setup command first.
+- **Existing documents:** the first time you work in a folder that already holds documents, offer to create an overview of them at the folder root — name what you see and ask first; don't analyze them unasked.
 - **Workbench location:** all flight tracking lives under `./flight-workbench/` in the connected folder — `history/`, `decisions/`, `memos/`, `archive/`, `stilwerk/`. Never put tasks or memos in `CLAUDE.md`.
 - **Memos & tasks:** open tasks → `flight-workbench/memos/tasks-<user>.md`; longer memos → `flight-workbench/memos/memos-<user>.md` (one file per OS user).
 - **Filenames:** `<prefix>-<name>.<ext>`, prefix from `date +"${FLIGHT_FILE_PREFIX:-%Y-%m-%d_%H-%M}"`. Always get timestamps by running `date` in the shell — never from your own clock (it is UTC and will be off by the local offset).

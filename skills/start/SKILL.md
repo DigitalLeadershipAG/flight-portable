@@ -116,6 +116,11 @@ Determine the OS user: `echo "$USER"`. Then gather:
 1. **Language** — read the `**Language:**` line from `./CLAUDE.md` (default English).
 2. **Open tasks** — read `./flight-workbench/memos/tasks-$USER.md`. Count the open tasks; if any exist, list them. If the file does not exist yet, there are simply no open tasks. (Tasks are no longer stored in CLAUDE.md — that file is shared with other tools.)
 3. **Recent sessions** — list the newest 2-3 files in `flight-workbench/history/` matching `*-session.md` by mtime; use each file's `## Summary` one-liner (or its filename) as the recent-session line.
+4. **Existing documents** — `ls` the project folder (ignore `flight-workbench/`, `.claude/`, `CLAUDE.md`). Note any user documents present (PDF, Word, text, markdown, spreadsheets, etc.) and how many.
+
+## Step 7b — Offer an overview of existing files
+
+If Step 7 found user documents in the folder, **offer to create an overview** in your report — do not analyze them unasked. For example: "I see 6 documents here (report.pdf, notes.md, …) — want me to read them and create an overview you can work from?" Only on a yes do you read them and write an overview as a normal deliverable in the folder root (`<prefix>-uebersicht.md` or similar), never into `CLAUDE.md` or `flight-workbench/`. If the folder has no such documents, skip this silently.
 
 ## Step 8 — Report to the user
 
@@ -154,6 +159,7 @@ If there are no open tasks, say so explicitly and prompt for input:
 In Claude Desktop there is no `pilot` agent and no auto-loaded `CLAUDE.md`, so apply these rules directly:
 
 - **No setup step needed:** if `./flight-workbench/` does not exist yet, create its folders (and copy the bundled style profiles if present) on first use, then continue — never ask the user to run a separate setup command first.
+- **Existing documents:** the first time you work in a folder that already holds documents, offer to create an overview of them at the folder root — name what you see and ask first; don't analyze them unasked.
 - **Workbench location:** all flight tracking lives under `./flight-workbench/` in the connected folder — `history/`, `decisions/`, `memos/`, `archive/`, `stilwerk/`. Never put tasks or memos in `CLAUDE.md`.
 - **Memos & tasks:** open tasks → `flight-workbench/memos/tasks-<user>.md`; longer memos → `flight-workbench/memos/memos-<user>.md` (one file per OS user).
 - **Filenames:** `<prefix>-<name>.<ext>`, prefix from `date +"${FLIGHT_FILE_PREFIX:-%Y-%m-%d_%H-%M}"`. Always get timestamps by running `date` in the shell — never from your own clock (it is UTC and will be off by the local offset).
