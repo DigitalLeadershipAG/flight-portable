@@ -1,15 +1,21 @@
-# flight
+# flight-portable
 
-A lightweight AI work companion plugin for [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview). Designed for non-technical users who want a calm, capable assistant for analyzing documents, discussing topics, and producing precise written outputs — without the complexity of multi-agent orchestration.
+A lightweight AI work companion for non-technical users — a calm, capable assistant for analyzing documents, discussing topics, and producing precise written outputs, without the complexity of multi-agent orchestration.
 
-The plugin is named **flight**; its single AI agent is named **pilot** (dispatch with `claude --agent flight:pilot`).
+This is a **portable build** of [flight](https://github.com/tenzoki/flight) that runs in three places:
 
-flight is a flightweight cousin of [fusion](https://github.com/tenzoki/fusion). Same family, much simpler.
+- **Claude Code** (CLI) — drop the skills/agent into a project's `.claude/`.
+- **Claude Cowork** — same `.claude/` layout in a connected project folder.
+- **Claude Desktop** — upload the skills as ZIPs (Settings → Capabilities → Skills).
+
+Its single AI agent is named **pilot**. Everything flight tracks is plain files in a `flight-workbench/` folder inside the folder you connect — there is **no MCP server** and nothing system-wide.
+
+> **Installing it?** See **[INSTALL.md](INSTALL.md)** for the step-by-step guide (German, non-technical) covering both Cowork and Desktop.
 
 ## What flight does
 
 - **Analyzes documents and discusses topics.** Bring a PDF, a spec, a transcript — talk it through, get a summary, draft a response.
-- **Produces well-styled written outputs.** Markdown by default; also `.pptx`, `.xlsx`, `.docx`, etc. on request. Documents apply a professional-voice stylometric profile so the prose reads cleanly; conversational replies apply a chat-voice profile that keeps them lean and direct. Deliverables land at the **project root** by default (next to `CLAUDE.md`), not inside `flight-workbench/`.
+- **Produces well-styled written outputs.** Markdown by default; also `.pptx`, `.xlsx`, `.docx`, etc. on request. Documents apply a professional-voice stylometric profile; conversational replies apply a leaner chat-voice profile. Deliverables land at the **connected-folder root**, not inside `flight-workbench/`.
 - **Tracks open tasks** in `flight-workbench/memos/tasks-<user>.md` — they show up automatically every session. (Not in `CLAUDE.md`, which is shared with other tools.)
 - **Files decisions** when you ask (or when a discussion surfaces an insight worth keeping).
 - **Logs every session** to `flight-workbench/history/`, so the conversation is durable even if you do not use git.
@@ -20,99 +26,70 @@ flight is a flightweight cousin of [fusion](https://github.com/tenzoki/fusion). 
 - Not [fusion](https://github.com/tenzoki/fusion). No orchestrator, no Turn loops, no Coherence checks, no compliance guard, no sub-agent dispatch.
 - Not silent. Flight asks before destructive operations.
 
-## Quick start (recommended — one line, no git)
+## Quick start
 
-In your terminal:
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/tenzoki/flight/main/install.sh | bash
-```
-
-This downloads flight over plain HTTPS into `~/.flight` and installs a `flight`
-launcher. No git, no SSH, no Claude Code marketplace. Then, in any project folder:
+**Claude Code & Cowork — one command.** Connect/open the folder you want to work in, then:
 
 ```bash
-flight          # starts Claude Code with the pilot agent loaded
-/flight:start   # sets up this project's workbench
+curl -fsSL https://raw.githubusercontent.com/REPLACE-ME/flight-portable/portable/install.sh | bash -s -- /path/to/your/folder
 ```
 
-- **Update:** `flight --update` (or re-run the one-liner above).
-- **Uninstall:** `flight --uninstall`.
-- **Where it lives:** `flight --where` (prints the install dir).
+This copies the skills into `<folder>/.claude/skills/`, the pilot agent into `<folder>/.claude/agents/`, creates `CLAUDE.md` (only if missing — your edits are never overwritten), and prepares the Desktop ZIPs in `<folder>/flight-desktop-skills/`. Then trigger `/flight:start` (or just ask Claude to "start flight").
 
-`/flight:start` creates a `flight-workbench/` folder, copies the style profiles, initializes `CLAUDE.md` (if missing), and tells you what's on your plate.
+**Claude Desktop — one command + upload.** Run the same command, then upload the 7 ZIPs from `flight-desktop-skills/` in Settings → Capabilities → Skills. Full steps in [INSTALL.md](INSTALL.md).
 
-### Where flight installs
+> Replace `REPLACE-ME` in the URL with this fork's GitHub org/user before sharing the command.
 
-The one-line installer writes to exactly two places — both in your home folder, nothing system-wide and nothing inside Claude Code's plugin cache:
+## The seven skills
 
-```
-~/.local/bin/flight     the `flight` command (a thin launcher script)
-~/.flight/              the plugin files: .claude-plugin/, agents/, skills/,
-                        templates/, stilwerk/, README, LICENSE
-```
+In Claude Code and Cowork these are slash commands (`/flight:start`); in Claude Desktop they trigger automatically from their description (no slash commands there).
 
-The launcher is one line — `claude --plugin-dir ~/.flight --agent flight:pilot "$@"` — so every run loads the plugin straight from `~/.flight`. That is why update and uninstall are reliable: there is no cache to get out of sync. `flight --where` prints the plugin path any time.
-
-Both locations are overridable with environment variables before installing:
-
-- `FLIGHT_HOME` — where the plugin files go (default `~/.flight`)
-- `FLIGHT_BIN` — where the `flight` launcher goes (default `~/.local/bin`)
-
-To remove flight completely: `flight --uninstall` (which is just `rm -rf ~/.flight` plus removing the launcher). Claude Code's own `~/.claude/` directory is never touched.
-
-### Alternative: Claude Code marketplace
-
-If you prefer the built-in plugin system (note: it uses git, which can fail when your git is configured for SSH):
-
-```bash
-/plugin marketplace add tenzoki/claude-plugins
-/plugin install flight@tenzoki-plugins
-```
-
-After that, just talk. When done, `/flight:land` closes the session cleanly.
-
-## The seven slash commands
-
-| Command | What it does |
+| Skill | What it does |
 |---|---|
-| `/flight:start` | Set up or refresh the workbench, read CLAUDE.md, show open tasks |
-| `/flight:land` | Close the session — summary to history, carry forward unresolved tasks |
-| `/flight:memo <text>` | Capture an open task (or a longer memo) |
-| `/flight:cleanup` | Strip closed/stale tasks from your task list, archive the strippings |
-| `/flight:archive` | Move old workbench files into a timestamped archive bundle |
-| `/flight:unlock` | Write a permissive permissions file so future sessions skip approval prompts |
-| `/flight:help` | Explainer. Optional topic: workflow, commands, files, language, style, tasks |
+| `start`   | Set up or refresh the workbench, read CLAUDE.md, show open tasks |
+| `land`    | Close the session — summary to history, carry forward unresolved tasks |
+| `memo`    | Capture an open task (or a longer memo) |
+| `cleanup` | Strip closed/stale tasks from your task list, archive the strippings |
+| `archive` | Move old workbench files into a timestamped archive bundle |
+| `unlock`  | Write a permissive permissions file so future sessions skip approval prompts (Claude Code only) |
+| `help`    | Explainer. Optional topic: workflow, commands, files, language, style, tasks |
 
-## What gets created in your project
+## What gets created in your folder
 
 ```
-your-project/
-├── CLAUDE.md                        ← project language + flight conventions
-├── <prefix>-<your-deliverable>.md   ← documents flight produces for you (project root, default location)
-├── .claude/settings.local.json      ← optional, written by /flight:unlock
+your-folder/
+├── CLAUDE.md                        ← project language + flight conventions (Cowork/Code)
+├── <prefix>-<your-deliverable>.md   ← documents flight produces for you (folder root, default)
+├── .claude/                         ← skills + pilot agent (Cowork/Code)
+├── flight-desktop-skills/           ← 7 ZIPs to upload into Claude Desktop
 └── flight-workbench/                ← internal scaffolding for flight's own tracking
     ├── history/                     ← one file per session (auto-logged)
     ├── decisions/                   ← important choices you tracked
-    ├── memos/                       ← your open tasks (tasks-<user>.md) + memos (memos-<user>.md), via /flight:memo only
-    ├── archive/                     ← /flight:cleanup and /flight:archive move here
-    ├── stilwerk/                    ← style profiles (professional-voice for documents, chat-voice for chat; read-only)
+    ├── memos/                       ← open tasks (tasks-<user>.md) + memos (memos-<user>.md), via memo only
+    ├── archive/                     ← cleanup and archive move here
+    ├── stilwerk/                    ← style profiles (read-only)
     └── .flight-setup                ← setup marker (when/where)
 ```
 
-Your deliverables — analyses, summaries, drafts, slide decks, anything flight produces for you — sit at the project root next to `CLAUDE.md`, easy to find. `flight-workbench/` is internal scaffolding for flight's own tracking; you do not need to look in there day-to-day.
-
-Every file flight creates carries a date-time prefix: `<prefix>-<name>.<ext>`. The default prefix renders as `YYYY-MM-DD_HH-MM` (e.g. `2026-05-28_04-50`). You can override it by setting the environment variable `FLIGHT_FILE_PREFIX` to a `date(1)` strftime string — e.g. `export FLIGHT_FILE_PREFIX='%Y%m%d-%H%M%S'` for full-year + seconds precision. Default keeps existing projects working; change it only on a clean project, or you will get inconsistent sort order.
+Every file flight creates carries a date-time prefix: `<prefix>-<name>.<ext>`, default `YYYY-MM-DD_HH-MM`. Override via the `FLIGHT_FILE_PREFIX` environment variable (a `date(1)` strftime string) — change it only on a clean project, or sort order becomes inconsistent.
 
 ## Language
 
-Default is English. If you work in another language, flight asks once whether to switch the project's language permanently (recorded in `CLAUDE.md`). flight ships professional-voice style profiles (for documents) and chat-voice profiles (for conversational replies) in English and German; for other languages, it reads the English profile and applies the same intent in the target language.
+Default is English. If you work in another language, flight asks once whether to switch the project's language permanently (recorded in `CLAUDE.md`). flight ships professional-voice and chat-voice profiles in English and German; for other languages it reads the English profile and applies the same intent in the target language.
+
+## Maintaining this fork
+
+```bash
+git fetch upstream && git merge upstream/main   # pull updates from tenzoki/flight
+scripts/build-desktop-zips.sh                   # rebuild the 7 Desktop ZIPs
+for t in tests/test_*.sh; do "$t"; done         # run the portability test suite
+```
 
 ## Requirements
 
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview) v2.0.12 or higher
-- That's it. No git, no Node, no Python required for the core skills. (Producing `.pptx` / `.xlsx` etc. uses Python libraries on request, but you do not need to install them upfront.)
+- **Claude Code** v2.0.12+, **Claude Cowork**, or **Claude Desktop** (Pro/Max/Team/Enterprise with code execution enabled).
+- No git, Node, or Python required for the core skills. (Producing `.pptx` / `.xlsx` etc. uses Python libraries on request.)
 
 ## License
 
-MIT. See [LICENSE](LICENSE).
+MIT. See [LICENSE](LICENSE). Based on [tenzoki/flight](https://github.com/tenzoki/flight).
