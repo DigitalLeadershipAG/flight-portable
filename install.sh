@@ -28,6 +28,10 @@ say "Installing flight into: $TARGET"
 mkdir -p "$TARGET/.claude/skills" "$TARGET/.claude/agents"
 cp -R "$SRC"/skills/* "$TARGET/.claude/skills/"
 cp "$SRC/agents/pilot.md" "$TARGET/.claude/agents/"
+if [ -d "$SRC/commands" ]; then
+  mkdir -p "$TARGET/.claude/commands"
+  cp "$SRC"/commands/*.md "$TARGET/.claude/commands/"
+fi
 if [ -f "$TARGET/CLAUDE.md" ]; then
   echo "  • CLAUDE.md exists — left unchanged."
 else
@@ -50,5 +54,5 @@ else
 fi
 
 if [ -n "$CLEANUP" ]; then rm -rf "$CLEANUP"; fi
-say "Done. Cowork/CLI: open this folder and say '/flight:start' (or just 'start flight')."
+say "Done. Cowork/CLI: open this folder and run '/flight-start' (or just ask Claude to 'start flight')."
 say "Desktop: upload each ZIP in flight-desktop-skills/ — see INSTALL.md."
