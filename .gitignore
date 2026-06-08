@@ -9,3 +9,6 @@ fusion-workbench/
 .idea/
 .vscode/
 *.swp
+
+# Build output
+dist/
