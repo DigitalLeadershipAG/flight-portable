@@ -59,8 +59,15 @@ if command -v zip >/dev/null 2>&1; then
     ( cd "$SRC/skills" && zip -r -q "$DESK/flight-$name.zip" "$name" -x '*.DS_Store' )
   done
   echo "  • 7 ZIPs in: $DESK"
+elif [ -d "$SRC/flight-desktop-skills" ]; then
+  # Distributed package archive ships prebuilt ZIPs — use them when 'zip' is unavailable.
+  say "Copying prebuilt Desktop skill ZIPs…"
+  DESK="$TARGET/flight-desktop-skills"
+  rm -rf "$DESK"; mkdir -p "$DESK"
+  cp "$SRC"/flight-desktop-skills/*.zip "$DESK"/
+  echo "  • prebuilt ZIPs in: $DESK"
 else
-  echo "  • 'zip' not found — skipping Desktop ZIPs (Cowork install is complete)."
+  echo "  • 'zip' not found and no prebuilt ZIPs — Desktop ZIPs skipped (Cowork install is complete)."
 fi
 
 if [ -n "$CLEANUP" ]; then rm -rf "$CLEANUP"; fi
