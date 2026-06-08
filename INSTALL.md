@@ -38,6 +38,10 @@ cat ~/mein-flight-ordner/flight-workbench/memos/tasks-*.md
 ```
 Die Zeile mit „Testaufgabe XY" muss da stehen — und nach Schließen/Öffnen noch vorhanden sein.
 
+## Was kann ich sagen?
+
+In Cowork/Desktop steuerst du Flight per natürlicher Sprache (keine Slash-Befehle). Eine Übersicht der Formulierungen — Aufgaben merken, Sessions, Dokumente erzeugen — steht in **[SPRACHBEFEHLE.md](SPRACHBEFEHLE.md)**.
+
 ## Troubleshooting
 
 - **Skills ausgegraut:** Code-Ausführung ist aus → in Capabilities aktivieren (bei Team/Enterprise ggf. Admin).

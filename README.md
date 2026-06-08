@@ -42,7 +42,7 @@ This copies the skills into `<folder>/.claude/skills/`, the pilot agent into `<f
 
 ## The seven skills
 
-In **Claude Code (CLI)** these are real slash commands (`/flight-start`, `/flight-memo`, …). In **Cowork and Claude Desktop** there are no slash commands — the skills trigger automatically from their description, so you just describe what you want ("merke dir …", "start flight").
+In **Claude Code (CLI)** these are real slash commands (`/flight-start`, `/flight-memo`, …). In **Cowork and Claude Desktop** there are no slash commands — the skills trigger automatically from their description, so you just describe what you want ("merke dir …", "start flight"). A German phrasebook of what to say is in **[SPRACHBEFEHLE.md](SPRACHBEFEHLE.md)**.
 
 | Skill | What it does |
 |---|---|
