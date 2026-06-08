@@ -4,7 +4,7 @@ argument-hint: [task text or longer memo]
 allowed-tools: [Read, Write, Edit, Bash, AskUserQuestion]
 ---
 
-# /flight:memo — record an open task or a memo
+# /flight-memo — record an open task or a memo
 
 Capture an open task or a memo into the per-user files under `flight-workbench/memos/`. When the user says "remember", "add a task", "we need to", "later", or anything similar, use this skill.
 
@@ -14,14 +14,14 @@ Capture an open task or a memo into the per-user files under `flight-workbench/m
 
 Determine the OS user first: `echo "$USER"`. Two files, both under `flight-workbench/memos/`:
 
-- **`flight-workbench/memos/tasks-$USER.md`** — the open-task checklist. A living list: items are added here, pruned by `/flight:cleanup`, carried forward by `/flight:land`, and surfaced at `/flight:start`.
+- **`flight-workbench/memos/tasks-$USER.md`** — the open-task checklist. A living list: items are added here, pruned by `/flight-cleanup`, carried forward by `/flight-land`, and surfaced at `/flight-start`.
 - **`flight-workbench/memos/memos-$USER.md`** — the memo log. Append-only, dated `##` sections, verbatim captures (the fusion memo model).
 
 Create either file if missing (see headers below). Always `mkdir -p ./flight-workbench/memos` first.
 
 ## Step 1 — Determine what the user wants to record
 
-If text was passed as an argument to `/flight:memo`, use it verbatim. Otherwise, ask:
+If text was passed as an argument to `/flight-memo`, use it verbatim. Otherwise, ask:
 
 > What should I record?
 
@@ -38,9 +38,9 @@ Read `./flight-workbench/memos/tasks-$USER.md`. If it does not exist, create it 
 ```markdown
 # Open tasks — <username>
 
-<!-- flight open-task checklist. One file per OS user. Added via /flight:memo, pruned via /flight:cleanup, carried forward by /flight:land, surfaced at /flight:start. Not stored in CLAUDE.md (shared with other tools). -->
+<!-- flight open-task checklist. One file per OS user. Added via /flight-memo, pruned via /flight-cleanup, carried forward by /flight-land, surfaced at /flight-start. Not stored in CLAUDE.md (shared with other tools). -->
 
-(No open tasks yet. Use /flight:memo <task> to add one.)
+(No open tasks yet. Use /flight-memo <task> to add one.)
 ```
 
 Append the new task as a markdown list item with a date prefix:
@@ -55,7 +55,7 @@ After updating, confirm to the user:
 
 > **Added to your open tasks.** "<task text>"
 >
-> You currently have N open tasks. Type `/flight:cleanup` any time to remove ones that are no longer relevant.
+> You currently have N open tasks. Type `/flight-cleanup` any time to remove ones that are no longer relevant.
 
 ## Step 2b — File as a longer memo (memos-$USER.md)
 
@@ -110,7 +110,7 @@ This keeps the history file as a complete record of what was discussed and produ
 ## What this skill does NOT do
 
 - **Never writes to CLAUDE.md.** Tasks go to `tasks-<user>.md`, memos to `memos-<user>.md`.
-- Does not delete or modify existing tasks (use `/flight:cleanup` for that).
+- Does not delete or modify existing tasks (use `/flight-cleanup` for that).
 - Does not reorder or rewrite existing memos.
 
 ## Flight conventions (works without the pilot agent)

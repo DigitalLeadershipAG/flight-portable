@@ -11,7 +11,7 @@ Your behavior is governed primarily by `CLAUDE.md` in the project root, which Cl
 
 ## Setup expectation
 
-If `./flight-workbench/` does not exist when you start, tell the user to run `/flight:start` first. Do not bootstrap the workbench yourself — that is `/flight:start`'s job.
+If `./flight-workbench/` does not exist when you start, tell the user to run `/flight-start` first. Do not bootstrap the workbench yourself — that is `/flight-start`'s job.
 
 ## Core conventions (one-screen summary)
 
@@ -24,8 +24,8 @@ If `./flight-workbench/` does not exist when you start, tell the user to run `/f
 - **Where user-requested deliverables go:** when the user asks you to produce a document for them — an analysis, summary, draft, slide deck, spreadsheet, anything you generate on their behalf as their output — write it to the **project root** by default, as `./<prefix>-<topic>.<ext>` (same filename rule as elsewhere). If the user names a specific location, use that instead. **Never** write a user-requested document under `flight-workbench/`. The workbench subfolders are reserved for flight's own tracking:
   - `flight-workbench/history/` — auto-logged session histories (only you write here)
   - `flight-workbench/decisions/` — decision records filed via the offer-then-file pattern
-  - `flight-workbench/memos/` — per-user open tasks (`tasks-<user>.md`) and memos (`memos-<user>.md`), via `/flight:memo` **only**
-  - `flight-workbench/archive/` — closed items moved by `/flight:archive` and `/flight:cleanup`
+  - `flight-workbench/memos/` — per-user open tasks (`tasks-<user>.md`) and memos (`memos-<user>.md`), via `/flight-memo` **only**
+  - `flight-workbench/archive/` — closed items moved by `/flight-archive` and `/flight-cleanup`
   - `flight-workbench/stilwerk/` — style profiles (read-only; do not edit)
 
   Treat `flight-workbench/` as internal scaffolding the user does not actively use. Their deliverables sit visibly at the project root next to `CLAUDE.md` so they are easy to find.
@@ -40,9 +40,9 @@ If `./flight-workbench/` does not exist when you start, tell the user to run `/f
 ## Open tasks and memos
 
 - Open tasks live in `flight-workbench/memos/tasks-<user>.md`; memos in `flight-workbench/memos/memos-<user>.md` (one file per OS user, determined by `$USER`). **Never store tasks or memos in `CLAUDE.md`** — it is auto-loaded into every session and shared with other tools (e.g. fusion) whose CLAUDE.md upkeep would prune or overwrite anything flight puts there.
-- Add tasks or memos via the `/flight:memo` skill (or when the user gives you a clear task in chat — offer to add it, do not add silently).
-- `/flight:land` carries forward unresolved tasks at session close.
-- `/flight:cleanup` strips closed/stale tasks from `tasks-<user>.md` and archives them.
+- Add tasks or memos via the `/flight-memo` skill (or when the user gives you a clear task in chat — offer to add it, do not add silently).
+- `/flight-land` carries forward unresolved tasks at session close.
+- `/flight-cleanup` strips closed/stale tasks from `tasks-<user>.md` and archives them.
 
 ## Output style for user-facing text
 
@@ -61,17 +61,17 @@ Which profile applies depends on what you are producing:
 
 ## Self-explanation
 
-You can teach the user about flight. The seven slash commands are:
+You can teach the user about flight. In Cowork and Claude Desktop you don't type slash commands — just tell me what you want and the matching skill runs automatically; the /flight-… commands work in Claude Code (CLI). The seven slash commands are:
 
 | Command | Purpose |
 |---|---|
-| `/flight:start` | Initialize or refresh the workbench, read CLAUDE.md, report open tasks |
-| `/flight:land` | Close the session: write summary to history, carry forward unresolved tasks into `memos/tasks-<user>.md` |
-| `/flight:memo <text>` | Add an open task to `memos/tasks-<user>.md`, or a longer memo to `memos/memos-<user>.md` |
-| `/flight:cleanup` | Remove closed/stale tasks from `memos/tasks-<user>.md`, archive what was removed |
-| `/flight:archive` | Archive completed/aged workbench files |
-| `/flight:unlock` | Write a permissive permissions file so future sessions skip approval prompts |
-| `/flight:help` | Explain flight to the user (this same content, plus pointers) |
+| `/flight-start` | Initialize or refresh the workbench, read CLAUDE.md, report open tasks |
+| `/flight-land` | Close the session: write summary to history, carry forward unresolved tasks into `memos/tasks-<user>.md` |
+| `/flight-memo <text>` | Add an open task to `memos/tasks-<user>.md`, or a longer memo to `memos/memos-<user>.md` |
+| `/flight-cleanup` | Remove closed/stale tasks from `memos/tasks-<user>.md`, archive what was removed |
+| `/flight-archive` | Archive completed/aged workbench files |
+| `/flight-unlock` | Write a permissive permissions file so future sessions skip approval prompts |
+| `/flight-help` | Explain flight to the user (this same content, plus pointers) |
 
 If the user asks how flight works, walk them through these in plain English. Offer to demonstrate one.
 

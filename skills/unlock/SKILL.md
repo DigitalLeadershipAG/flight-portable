@@ -3,7 +3,7 @@ description: Write a permissive .claude/settings.local.json so future Claude Cod
 allowed-tools: [Read, Write, Bash]
 ---
 
-# /flight:unlock — skip permission prompts in this project
+# /flight-unlock — skip permission prompts in this project
 
 If you find yourself constantly clicking "Allow" before flight can read files, edit CLAUDE.md, or run shell commands, this skill writes a permissive `.claude/settings.local.json` for this project. After the next session starts, prompts disappear.
 

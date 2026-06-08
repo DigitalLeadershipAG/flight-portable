@@ -3,7 +3,7 @@ description: Initialize the flight workbench in the current project directory. C
 allowed-tools: [Read, Write, Bash, Edit, AskUserQuestion]
 ---
 
-# /flight:start — initialize a flight project
+# /flight-start — initialize a flight project
 
 Run this once in any project folder to set up the flight workbench, or re-run it any time to refresh the style profiles and verify the layout.
 
@@ -21,7 +21,7 @@ Report the path to the user. The workbench will be created at `./flight-workbenc
 
 The four style profiles ship **inside this skill** at `<skill-dir>/stilwerk/`. Claude provides this skill's own directory at invocation (look for "Base directory for this skill:" in this prompt's context). Use that directory directly — there is no separate plugin install to locate. The four files are `professional-voice-en.yaml`, `professional-voice-de.yaml`, `chat-voice-en.yaml`, `chat-voice-de.yaml`.
 
-If you cannot determine the skill directory, warn the user that the style profiles could not be installed; the workbench is still usable and `/flight:memo`, history, etc. all work — only the stylometric polish is missing until `/flight:start` is re-run.
+If you cannot determine the skill directory, warn the user that the style profiles could not be installed; the workbench is still usable and `/flight-memo`, history, etc. all work — only the stylometric polish is missing until `/flight-start` is re-run.
 
 ## Step 2 — Create the workbench
 
@@ -33,7 +33,7 @@ mkdir -p ./flight-workbench/history ./flight-workbench/decisions ./flight-workbe
 
 ## Step 3 — Install the style profiles
 
-Copy all four YAML profiles from `<skill-dir>/stilwerk/` into `./flight-workbench/stilwerk/`. Always overwrite — the source-of-truth is the bundled skill version, so a refresh on /flight:start re-installs the latest. Use:
+Copy all four YAML profiles from `<skill-dir>/stilwerk/` into `./flight-workbench/stilwerk/`. Always overwrite — the source-of-truth is the bundled skill version, so a refresh on /flight-start re-installs the latest. Use:
 
 ```bash
 cp "<skill-dir>/stilwerk/professional-voice-en.yaml" ./flight-workbench/stilwerk/
@@ -107,7 +107,7 @@ EOF
 
 **Run the bash block above as-is.** Both `${TS}` (the filename prefix) and the `**Started:**` line must come from the shell's `date` output — do not construct the filename or the start time from a timestamp you generated yourself. Your internal clock is UTC and would put the file ~2 hours behind local time (in Central European Summer Time).
 
-This file will be appended to throughout the session and finalized at `/flight:land`.
+This file will be appended to throughout the session and finalized at `/flight-land`.
 
 ## Step 7 — Gather session-start context
 
@@ -133,13 +133,15 @@ Output a short, action-first summary. Lead with **what the user can do next**:
 > - <recent session line 1>
 > - <recent session line 2>
 >
-> **Details:** Workbench at `./flight-workbench/`; CLAUDE.md at project root (language + flight conventions only); open tasks at `flight-workbench/memos/tasks-<user>.md`; style profiles under `flight-workbench/stilwerk/`; this session's history at `flight-workbench/history/<TS>-session.md`. Type `/flight:help` for a tour.
+> **Details:** Workbench at `./flight-workbench/`; CLAUDE.md at project root (language + flight conventions only); open tasks at `flight-workbench/memos/tasks-<user>.md`; style profiles under `flight-workbench/stilwerk/`; this session's history at `flight-workbench/history/<TS>-session.md`. Type `/flight-help` for a tour.
+>
+> In Cowork and Claude Desktop you don't type slash commands — just tell me what you want and the matching skill runs automatically; the /flight-… commands work in Claude Code (CLI).
 
 If there are no open tasks, say so explicitly and prompt for input:
 
 > **Flight is ready. No open tasks recorded — what would you like to work on?**
 >
-> Project language: <lang>. Type `/flight:help` if you want a tour of what flight can do.
+> Project language: <lang>. Type `/flight-help` if you want a tour of what flight can do.
 
 ## What this skill does NOT do
 

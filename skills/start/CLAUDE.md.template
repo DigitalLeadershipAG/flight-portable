@@ -27,15 +27,17 @@ You are running as **pilot** — the single general-purpose AI work companion of
 
 ### Slash commands
 
+In Cowork and Claude Desktop you don't type slash commands — just tell me what you want and the matching skill runs automatically; the /flight-… commands work in Claude Code (CLI).
+
 | Command | What it does |
 |---|---|
-| `/flight:start` | Set up/refresh the workbench, read this file, show open tasks |
-| `/flight:land` | Close the session — summary to history, carry unresolved tasks forward |
-| `/flight:memo <text>` | Add an open task (`tasks-<user>.md`) or a memo (`memos-<user>.md`) |
-| `/flight:cleanup` | Strip closed/stale tasks from `tasks-<user>.md`, archive the strippings |
-| `/flight:archive` | Archive completed/aged workbench files |
-| `/flight:unlock` | Write a permissive permissions file so no approval prompts appear |
-| `/flight:help` | Explain flight to the user |
+| `/flight-start` | Set up/refresh the workbench, read this file, show open tasks |
+| `/flight-land` | Close the session — summary to history, carry unresolved tasks forward |
+| `/flight-memo <text>` | Add an open task (`tasks-<user>.md`) or a memo (`memos-<user>.md`) |
+| `/flight-cleanup` | Strip closed/stale tasks from `tasks-<user>.md`, archive the strippings |
+| `/flight-archive` | Archive completed/aged workbench files |
+| `/flight-unlock` | Write a permissive permissions file so no approval prompts appear |
+| `/flight-help` | Explain flight to the user |
 
 ---
 

@@ -3,7 +3,7 @@ description: Close the current flight session. Writes a session summary to fligh
 allowed-tools: [Read, Write, Edit, Bash, AskUserQuestion]
 ---
 
-# /flight:land — close the session
+# /flight-land — close the session
 
 Use this when you are done working. Land does two things:
 
@@ -37,7 +37,7 @@ If multiple session files share today's date, pick the newest (latest mtime). If
 
 Determine the OS user: `echo "$USER"`.
 
-Read the session history file. Scan the `## Log` section for any task-like entries that surfaced during the session — phrases like "TODO", "follow up", "we need to", "later", or tasks added via `/flight:memo` during this session. Tasks already added via `/flight:memo` are in `flight-workbench/memos/tasks-$USER.md`; what you are looking for here is tasks **discussed but not yet recorded**.
+Read the session history file. Scan the `## Log` section for any task-like entries that surfaced during the session — phrases like "TODO", "follow up", "we need to", "later", or tasks added via `/flight-memo` during this session. Tasks already added via `/flight-memo` are in `flight-workbench/memos/tasks-$USER.md`; what you are looking for here is tasks **discussed but not yet recorded**.
 
 For each candidate unresolved task, ask the user (group several into one `AskUserQuestion` if there are many):
 
@@ -47,7 +47,7 @@ For each candidate unresolved task, ask the user (group several into one `AskUse
 > - **No, drop it** — it was a passing thought
 > - **Already done** — do not carry forward
 
-For each "Yes", append the task to `flight-workbench/memos/tasks-$USER.md` using the `/flight:memo` Step 2a procedure (date-prefixed line item; create the file from its header if missing).
+For each "Yes", append the task to `flight-workbench/memos/tasks-$USER.md` using the `/flight-memo` Step 2a procedure (date-prefixed line item; create the file from its header if missing).
 
 ## Step 3 — Write the session summary to history
 
@@ -94,11 +94,11 @@ Then update the `**Status:**` line at the top of the file from `active` to `comp
 > - Session history: `flight-workbench/history/<filename>`
 > - Open tasks now: N (`flight-workbench/memos/tasks-<user>.md`)
 >
-> Have a good one. Next time you start, `/flight:start` will pick up where we left off.
+> Have a good one. Next time you start, `/flight-start` will pick up where we left off.
 
 ## What this skill does NOT do
 
 - **Never edits CLAUDE.md.** Flight keeps no tasks, memos, or session log there.
 - Does not commit anything to git (flight does not assume git use).
 - Does not delete the workbench or any history files.
-- Does not run `/flight:cleanup` automatically — task hygiene is a separate explicit action.
+- Does not run `/flight-cleanup` automatically — task hygiene is a separate explicit action.

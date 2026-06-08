@@ -1,9 +1,9 @@
 ---
-description: Clean up flight's open-task list in flight-workbench/memos/tasks-<user>.md. Removes tasks the user has marked closed, and for tasks that look obviously outdated or redundant, asks the user whether to archive, delete, or keep each. Strippings go to flight-workbench/archive/<prefix>-cleanup-strippings.md so nothing is lost. Run when the open-task list has grown long or stale; complements /flight:land (which is broader — session close plus history finalization). Does not touch CLAUDE.md.
+description: Clean up flight's open-task list in flight-workbench/memos/tasks-<user>.md. Removes tasks the user has marked closed, and for tasks that look obviously outdated or redundant, asks the user whether to archive, delete, or keep each. Strippings go to flight-workbench/archive/<prefix>-cleanup-strippings.md so nothing is lost. Run when the open-task list has grown long or stale; complements /flight-land (which is broader — session close plus history finalization). Does not touch CLAUDE.md.
 allowed-tools: [Read, Write, Edit, Bash, AskUserQuestion]
 ---
 
-# /flight:cleanup — strip closed and stale tasks
+# /flight-cleanup — strip closed and stale tasks
 
 The open-task list in `flight-workbench/memos/tasks-<user>.md` accumulates over time. This skill:
 
@@ -11,7 +11,7 @@ The open-task list in `flight-workbench/memos/tasks-<user>.md` accumulates over 
 2. **Reviews** tasks that look outdated or redundant, asking the user case-by-case: archive, delete, or keep.
 3. **Archives** everything removed to a single timestamped file under `flight-workbench/archive/`, so nothing is permanently lost.
 
-This is narrower than `/flight:land`. Cleanup only touches the open-task list. It **never** touches CLAUDE.md (CLAUDE.md is shared with other tools and holds no flight tasks).
+This is narrower than `/flight-land`. Cleanup only touches the open-task list. It **never** touches CLAUDE.md (CLAUDE.md is shared with other tools and holds no flight tasks).
 
 ## Step 1 — Read the task list
 
@@ -69,7 +69,7 @@ Content:
 ```markdown
 # Cleanup strippings — <YYYY-MM-DD HH:MM>
 
-Tasks removed from flight-workbench/memos/tasks-<user>.md during `/flight:cleanup`.
+Tasks removed from flight-workbench/memos/tasks-<user>.md during `/flight-cleanup`.
 
 ## Closed tasks
 
@@ -102,7 +102,7 @@ Use the `Edit` tool to replace the task list in `tasks-$USER.md` with the surviv
 If the surviving list is empty, restore the placeholder:
 
 ```
-(No open tasks yet. Use /flight:memo <task> to add one.)
+(No open tasks yet. Use /flight-memo <task> to add one.)
 ```
 
 ## Step 7 — Append a log entry to the session history

@@ -4,17 +4,17 @@ argument-hint: [tier or natural-language description]
 allowed-tools: [Read, Write, Bash, Edit, AskUserQuestion]
 ---
 
-# /flight:archive — thin out the workbench
+# /flight-archive — thin out the workbench
 
 Move completed or aged files in the workbench into a single timestamped archive bundle. Nothing is deleted — everything stays on disk under `flight-workbench/archive/<prefix>-<slug>/` and can be retrieved any time. The `<prefix>` is the project's configured date-time prefix (env var `FLIGHT_FILE_PREFIX`, default `%Y-%m-%d_%H-%M` → `YYYY-MM-DD_HH-MM`).
 
-This is **distinct from `/flight:cleanup`**:
-- `/flight:cleanup` operates on CLAUDE.md's open-task list only.
-- `/flight:archive` operates on workbench files (history, decisions, memos).
+This is **distinct from `/flight-cleanup`**:
+- `/flight-cleanup` operates on CLAUDE.md's open-task list only.
+- `/flight-archive` operates on workbench files (history, decisions, memos).
 
 ## Step 1 — Determine scope
 
-If the user passed text as an argument (e.g. `/flight:archive everything older than April`), use it. Otherwise, present three pre-defined tiers via `AskUserQuestion`:
+If the user passed text as an argument (e.g. `/flight-archive everything older than April`), use it. Otherwise, present three pre-defined tiers via `AskUserQuestion`:
 
 - **Recent only (Recommended)** — archive history and memo files older than 14 days that have not been touched since. Keeps the workbench responsive without losing anything from the past two weeks.
 - **Mid** — archive everything older than 60 days. Suitable for periodic cleanup.
@@ -62,7 +62,7 @@ Show the user the candidate list grouped by folder, with counts:
 
 If the candidate list is empty:
 
-> **Nothing to archive.** No files match the scope. Try a wider scope (e.g. `/flight:archive everything older than April`).
+> **Nothing to archive.** No files match the scope. Try a wider scope (e.g. `/flight-archive everything older than April`).
 
 ## Step 4 — Generate the archive slug
 
