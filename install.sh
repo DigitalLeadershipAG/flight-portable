@@ -70,7 +70,7 @@ else
   echo "  • CLAUDE.md created."
 fi
 
-# 3. Desktop track — build the 7 ZIPs into the target so colleagues can upload them.
+# 3. Desktop track — build one ZIP per skill into the target so colleagues can upload them.
 if command -v zip >/dev/null 2>&1; then
   say "Preparing Desktop skill ZIPs…"
   DESK="$TARGET/flight-desktop-skills"
@@ -79,7 +79,7 @@ if command -v zip >/dev/null 2>&1; then
     name="$(basename "$d")"
     ( cd "$SRC/skills" && zip -r -q "$DESK/flight-$name.zip" "$name" -x '*.DS_Store' )
   done
-  echo "  • 7 ZIPs in: $DESK"
+  echo "  • $(ls "$DESK"/flight-*.zip | wc -l | tr -d ' ') ZIPs in: $DESK"
 elif [ -d "$SRC/flight-desktop-skills" ]; then
   # Distributed package archive ships prebuilt ZIPs — use them when 'zip' is unavailable.
   say "Copying prebuilt Desktop skill ZIPs…"

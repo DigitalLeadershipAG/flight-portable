@@ -7,11 +7,11 @@ fail() { echo "FAIL: $1"; exit 1; }
 ARC="$ROOT/dist/flight-portable.zip"
 [ -f "$ARC" ] || fail "archive not built"
 
-# Archive must be self-contained: installer, skills, and the 7 prebuilt Desktop ZIPs.
+# Archive must be self-contained: installer, skills, and the 8 prebuilt Desktop ZIPs.
 { unzip -l "$ARC" || true; } | grep -q "flight-portable/install.sh"          || fail "archive missing install.sh"
 { unzip -l "$ARC" || true; } | grep -q "flight-portable/skills/start/SKILL.md" || fail "archive missing skills"
 n=$({ unzip -l "$ARC" || true; } | grep -c "flight-portable/flight-desktop-skills/flight-.*\.zip" || true)
-[ "$n" = "7" ] || fail "archive should ship 7 prebuilt Desktop ZIPs, has $n"
+[ "$n" = "8" ] || fail "archive should ship 8 prebuilt Desktop ZIPs, has $n"
 
 # Unpacked archive must install OFFLINE (no FLIGHT_PORTABLE_SRC, no network) via clone-local detection.
 TMP="$(mktemp -d)"; TGT="$(mktemp -d)"; trap 'rm -rf "$TMP" "$TGT"' EXIT

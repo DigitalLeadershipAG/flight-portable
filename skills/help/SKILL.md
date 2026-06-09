@@ -60,7 +60,7 @@ In Cowork and Claude Desktop you don't type slash commands — just tell me what
 
 ## Topic: commands
 
-> **The seven slash commands:**
+> **The eight slash commands:**
 >
 > **`/flight-start`** — Sets up the workbench (creates `flight-workbench/` and copies the style profiles) and reads CLAUDE.md. Safe to re-run any time; it never overwrites your content.
 >
@@ -71,6 +71,8 @@ In Cowork and Claude Desktop you don't type slash commands — just tell me what
 > **`/flight-cleanup`** — Trims your open-task list. Removes tasks you have marked closed (e.g. with `[x]`), and asks you about each task that looks stale or redundant. Strippings go to `flight-workbench/archive/` so nothing is lost.
 >
 > **`/flight-archive`** — Moves old workbench files (history, memos, decisions) into a timestamped archive bundle. Pre-defined scopes (recent / mid / deep) or describe in your own words ("everything older than April").
+>
+> **`/flight-stilcheck <text/file>`** — Checks a text against the style profile (professional or chat), lists where it deviates with concrete fixes, and offers a revised version. Revisions are saved as a new file in the folder root; the original is left untouched.
 >
 > **`/flight-unlock`** — Writes a permissions file so you stop getting "Allow Bash? Allow Write?" prompts in this project. Takes effect on next session.
 >

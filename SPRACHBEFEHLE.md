@@ -27,6 +27,10 @@ Hier die wichtigsten Formulierungen:
 
 Fertige Dokumente landen im **verbundenen Ordner** (neben `CLAUDE.md`); die Stil-Profile (professional für Dokumente, chat für Gespräche) werden automatisch angewandt.
 
+## Stil prüfen
+- „**Prüf den Stil von [Datei/Text]**" · „**Ist das im richtigen Ton?**" · „**Klingt das nach uns?**"
+- Flight bewertet den Text gegen das Profil (professional oder chat), zeigt Abweichungen mit Fundstellen und bietet auf Wunsch eine überarbeitete Fassung an.
+
 ## Hilfe & Sprache
 - „**Was kannst du alles? / Erklär mir flight**"
 - „**Lass uns auf Deutsch arbeiten**" → ändert die Projektsprache (in `CLAUDE.md`); danach greifen automatisch die deutschen Stil-Profile

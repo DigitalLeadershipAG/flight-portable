@@ -38,7 +38,7 @@ gh repo clone DigitalLeadershipAG/flight-portable
 This copies the skills into `<folder>/.claude/skills/`, the pilot agent into `<folder>/.claude/agents/`, the slash-command wrappers into `<folder>/.claude/commands/`, creates `CLAUDE.md` (only if missing — your edits are never overwritten), and prepares the Desktop ZIPs in `<folder>/flight-desktop-skills/`. Then just ask Claude to "start flight" (in Claude Code you can also type `/flight-start`).
 
 - **Cowork:** connect the folder, then talk to Claude in natural language (no slash commands).
-- **Claude Desktop:** upload the 7 ZIPs from `flight-desktop-skills/` in Settings → Capabilities → Skills.
+- **Claude Desktop:** upload the 8 ZIPs from `flight-desktop-skills/` in Settings → Capabilities → Skills.
 - **All projects at once:** `./flight-portable/install.sh --global` installs into `~/.claude/`, making flight available in every Cowork/Claude Code project (the workbench is still created per connected folder).
 - **Team sharing:** install into a Dropbox-synced folder — `flight-workbench/` (tasks, memos, history) and the `.claude/` skills then sync to the whole team. See the "Team-Setup über Dropbox" section in [INSTALL.md](INSTALL.md).
 
@@ -46,7 +46,7 @@ Full step-by-step guide: **[INSTALL.md](INSTALL.md)**.
 
 > If the repo is later made public, the one-liner `curl -fsSL https://raw.githubusercontent.com/DigitalLeadershipAG/flight-portable/portable/install.sh | bash -s -- /path/to/folder` also works.
 
-## The seven skills
+## The eight skills
 
 In **Claude Code (CLI)** these are real slash commands (`/flight-start`, `/flight-memo`, …). In **Cowork and Claude Desktop** there are no slash commands — the skills trigger automatically from their description, so you just describe what you want ("merke dir …", "start flight"). A German phrasebook of what to say is in **[SPRACHBEFEHLE.md](SPRACHBEFEHLE.md)**.
 
@@ -57,6 +57,7 @@ In **Claude Code (CLI)** these are real slash commands (`/flight-start`, `/fligh
 | `memo`    | Capture an open task (or a longer memo) |
 | `cleanup` | Strip closed/stale tasks from your task list, archive the strippings |
 | `archive` | Move old workbench files into a timestamped archive bundle |
+| `stilcheck` | Check text against the style profile, report deviations, optionally produce a revised version |
 | `unlock`  | Write a permissive permissions file so future sessions skip approval prompts (Claude Code only) |
 | `help`    | Explainer. Optional topic: workflow, commands, files, language, style, tasks |
 
@@ -67,7 +68,7 @@ your-folder/
 ├── CLAUDE.md                        ← project language + flight conventions (Cowork/Code)
 ├── <prefix>-<your-deliverable>.md   ← documents flight produces for you (folder root, default)
 ├── .claude/                         ← skills + pilot agent (Cowork/Code)
-├── flight-desktop-skills/           ← 7 ZIPs to upload into Claude Desktop
+├── flight-desktop-skills/           ← 8 ZIPs to upload into Claude Desktop
 └── flight-workbench/                ← internal scaffolding for flight's own tracking
     ├── history/                     ← one file per session (auto-logged)
     ├── decisions/                   ← important choices you tracked
@@ -87,7 +88,7 @@ Default is English. If you work in another language, flight asks once whether to
 
 ```bash
 git fetch upstream && git merge upstream/main   # pull updates from tenzoki/flight
-scripts/build-desktop-zips.sh                   # rebuild the 7 Desktop ZIPs
+scripts/build-desktop-zips.sh                   # rebuild the 8 Desktop ZIPs
 for t in tests/test_*.sh; do "$t"; done         # run the portability test suite
 ```
 

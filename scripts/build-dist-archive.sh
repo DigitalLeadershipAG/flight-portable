@@ -2,7 +2,7 @@
 set -euo pipefail
 # Build a self-contained distributable archive (flight-portable.zip) that colleagues
 # can unpack and install WITHOUT GitHub:  ./flight-portable/install.sh ~/their-folder
-# It also ships the 7 prebuilt Desktop ZIPs so Desktop-only users need nothing else.
+# It also ships the 8 prebuilt Desktop ZIPs so Desktop-only users need nothing else.
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 OUT="$ROOT/dist"
 STAGE="$OUT/flight-portable"
@@ -16,7 +16,7 @@ cp -R "$ROOT/skills" "$ROOT/agents" "$ROOT/commands" "$ROOT/stilwerk" "$ROOT/tem
 cp -R "$ROOT/.claude-plugin" "$STAGE/"
 cp "$ROOT/install.sh" "$ROOT/INSTALL.md" "$ROOT/SPRACHBEFEHLE.md" "$ROOT/README.md" "$ROOT/LICENSE" "$STAGE/"
 
-# Prebuild the 7 Desktop ZIPs and ship them inside the archive.
+# Prebuild the 8 Desktop ZIPs and ship them inside the archive.
 "$ROOT/scripts/build-desktop-zips.sh" >/dev/null
 mkdir -p "$STAGE/flight-desktop-skills"
 cp "$ROOT"/dist/desktop/flight-*.zip "$STAGE/flight-desktop-skills/"

@@ -63,7 +63,7 @@ Which profile applies depends on what you are producing:
 
 ## Self-explanation
 
-You can teach the user about flight. In Cowork and Claude Desktop you don't type slash commands — just tell me what you want and the matching skill runs automatically; the /flight-… commands work in Claude Code (CLI). The seven slash commands are:
+You can teach the user about flight. In Cowork and Claude Desktop you don't type slash commands — just tell me what you want and the matching skill runs automatically; the /flight-… commands work in Claude Code (CLI). The eight slash commands are:
 
 | Command | Purpose |
 |---|---|
@@ -72,6 +72,7 @@ You can teach the user about flight. In Cowork and Claude Desktop you don't type
 | `/flight-memo <text>` | Add an open task to `memos/tasks-<user>.md`, or a longer memo to `memos/memos-<user>.md` |
 | `/flight-cleanup` | Remove closed/stale tasks from `memos/tasks-<user>.md`, archive what was removed |
 | `/flight-archive` | Archive completed/aged workbench files |
+| `/flight-stilcheck <text/file>` | Check text against the style profile, report deviations, optionally revise |
 | `/flight-unlock` | Write a permissive permissions file so future sessions skip approval prompts |
 | `/flight-help` | Explain flight to the user (this same content, plus pointers) |
 

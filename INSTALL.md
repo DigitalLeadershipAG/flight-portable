@@ -17,9 +17,9 @@ unzip flight-portable.zip
 ./flight-portable/install.sh ~/mein-flight-ordner
 ```
 
-Das kopiert die Skills und den `pilot`-Agenten nach `~/mein-flight-ordner/.claude/`, legt `CLAUDE.md` an (nur falls noch keine existiert), und erstellt den Ordner **`flight-desktop-skills/`** mit 7 ZIP-Dateien für den Desktop-Upload.
+Das kopiert die Skills und den `pilot`-Agenten nach `~/mein-flight-ordner/.claude/`, legt `CLAUDE.md` an (nur falls noch keine existiert), und erstellt den Ordner **`flight-desktop-skills/`** mit 8 ZIP-Dateien für den Desktop-Upload.
 
-> **Nur Desktop und kein Terminal?** Dann brauchst du `install.sh` gar nicht — entpacke `flight-portable.zip` und nimm direkt die 7 ZIPs aus dem Ordner `flight-portable/flight-desktop-skills/` zum Hochladen (siehe Desktop-Abschnitt).
+> **Nur Desktop und kein Terminal?** Dann brauchst du `install.sh` gar nicht — entpacke `flight-portable.zip` und nimm direkt die 8 ZIPs aus dem Ordner `flight-portable/flight-desktop-skills/` zum Hochladen (siehe Desktop-Abschnitt).
 
 <details>
 <summary>Alternative für Maintainer: per GitHub klonen</summary>
@@ -54,7 +54,7 @@ Das legt die Skills, den Agenten und die Befehle in `~/.claude/` ab. Danach ist 
 Der Upload von Skills passiert in Desktop über die Oberfläche — das kann kein Skript. Die ZIPs hat die Einrichtung oben schon erzeugt.
 
 1. In Claude Desktop: **Einstellungen → Capabilities → Skills → „+" / „Upload a skill"**.
-2. Lade nacheinander alle 7 ZIPs aus `~/mein-flight-ordner/flight-desktop-skills/` hoch (`flight-start.zip`, `flight-memo.zip`, …). Jeden Skill nach dem Upload **einschalten**.
+2. Lade nacheinander alle 8 ZIPs aus `~/mein-flight-ordner/flight-desktop-skills/` hoch (`flight-start.zip`, `flight-memo.zip`, …). Jeden Skill nach dem Upload **einschalten**.
 3. `~/mein-flight-ordner` mit Claude Desktop verbinden (Project Folder).
 4. Den Inhalt von `~/mein-flight-ordner/.claude/agents/pilot.md` einmalig in die **Projekt-Instruktionen** kopieren, damit Claude sich wie „pilot" verhält.
 
@@ -68,11 +68,11 @@ Flight speichert alles als Dateien im verbundenen Ordner. Liegt dieser in **Drop
    ```bash
    ./flight-portable/install.sh ~/Dropbox/unser-flight-ordner
    ```
-   Das legt `.claude/` (Skills + Agent + Befehle) **und** den Ordner `flight-desktop-skills/` (die 7 ZIPs) im Ordner ab — beides synct zu allen Kollegen.
+   Das legt `.claude/` (Skills + Agent + Befehle) **und** den Ordner `flight-desktop-skills/` (die 8 ZIPs) im Ordner ab — beides synct zu allen Kollegen.
 
 **Jeder Kollege:**
 - **Cowork:** den synchronisierten Ordner in Cowork verbinden — die Skills sind durch die Dropbox-Sync schon da, **keine eigene Installation nötig**. Einfach mit Claude reden.
-- **Desktop:** die 7 ZIPs aus `…/flight-desktop-skills/` einmal hochladen (Skills syncen in Desktop **nicht** über Dropbox).
+- **Desktop:** die 8 ZIPs aus `…/flight-desktop-skills/` einmal hochladen (Skills syncen in Desktop **nicht** über Dropbox).
 
 **Was geteilt wird:** `flight-workbench/memos/` (Aufgaben/Memos), `flight-workbench/history/` (Sitzungsverläufe), `flight-workbench/decisions/` und alle erzeugten Dokumente im Ordner.
 
