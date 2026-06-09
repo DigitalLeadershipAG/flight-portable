@@ -28,11 +28,10 @@ Its single AI agent is named **pilot**. Everything flight tracks is plain files 
 
 ## Quick start
 
-This is a **private** repo, so install by cloning (needs [`gh`](https://cli.github.com/) and DigitalLeadershipAG org access). Once per machine — adjust the folder path:
+Install in one command — no GitHub account needed (adjust the folder path):
 
 ```bash
-gh repo clone DigitalLeadershipAG/flight-portable
-./flight-portable/install.sh /path/to/your/folder
+curl -fsSL https://raw.githubusercontent.com/DigitalLeadershipAG/flight-portable/portable/install.sh | bash -s -- /path/to/your/folder
 ```
 
 This copies the skills into `<folder>/.claude/skills/`, the pilot agent into `<folder>/.claude/agents/`, the slash-command wrappers into `<folder>/.claude/commands/`, creates `CLAUDE.md` (only if missing — your edits are never overwritten), and prepares the Desktop ZIPs in `<folder>/flight-desktop-skills/`. Then just ask Claude to "start flight" (in Claude Code you can also type `/flight-start`).
@@ -44,7 +43,7 @@ This copies the skills into `<folder>/.claude/skills/`, the pilot agent into `<f
 
 Full step-by-step guide: **[INSTALL.md](INSTALL.md)**.
 
-> If the repo is later made public, the one-liner `curl -fsSL https://raw.githubusercontent.com/DigitalLeadershipAG/flight-portable/portable/install.sh | bash -s -- /path/to/folder` also works.
+> Prefer a clone? `gh repo clone DigitalLeadershipAG/flight-portable && ./flight-portable/install.sh /path/to/folder`.
 
 ### Alternative: install as a plugin (Claude Code — real slash commands)
 

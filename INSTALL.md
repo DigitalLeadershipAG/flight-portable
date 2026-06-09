@@ -10,28 +10,25 @@ Flight ist dein Arbeits-Begleiter: Aufgaben merken, Memos festhalten, Dokumente 
 
 ## Einmalige Einrichtung (Terminal)
 
-Du bekommst von uns die Datei **`flight-portable.zip`** (per Laufwerk, Mail oder Slack) — **kein GitHub-Account nötig**. Entpacken und installieren (Ordnerpfad anpassen):
+Ein Befehl — **kein GitHub-Account nötig** (Ordnerpfad anpassen):
 
 ```bash
-unzip flight-portable.zip
-./flight-portable/install.sh ~/mein-flight-ordner
+curl -fsSL https://raw.githubusercontent.com/DigitalLeadershipAG/flight-portable/portable/install.sh | bash -s -- ~/mein-flight-ordner
 ```
 
 Das kopiert die Skills und den `pilot`-Agenten nach `~/mein-flight-ordner/.claude/`, legt `CLAUDE.md` an (nur falls noch keine existiert), und erstellt den Ordner **`flight-desktop-skills/`** mit 8 ZIP-Dateien für den Desktop-Upload.
 
-> **Nur Desktop und kein Terminal?** Dann brauchst du `install.sh` gar nicht — entpacke `flight-portable.zip` und nimm direkt die 8 ZIPs aus dem Ordner `flight-portable/flight-desktop-skills/` zum Hochladen (siehe Desktop-Abschnitt).
+> **Nur Desktop und kein Terminal?** Lade das Archiv `flight-portable.zip` von der [Releases-Seite](https://github.com/DigitalLeadershipAG/flight-portable/releases), entpacke es und nimm direkt die 8 ZIPs aus `flight-portable/flight-desktop-skills/` zum Hochladen (siehe Desktop-Abschnitt).
 
 <details>
-<summary>Alternative für Maintainer: per GitHub klonen</summary>
+<summary>Alternativen</summary>
 
-Mit [`gh`](https://cli.github.com/) (eingeloggt, Mitglied der Org **DigitalLeadershipAG**):
-
-```bash
-gh repo clone DigitalLeadershipAG/flight-portable
-./flight-portable/install.sh ~/mein-flight-ordner
-```
-
-Ist das Repo später öffentlich, geht auch der Einzeiler `curl -fsSL https://raw.githubusercontent.com/DigitalLeadershipAG/flight-portable/portable/install.sh | bash -s -- ~/mein-flight-ordner`.
+- **Per Klon** (z.B. für Maintainer):
+  ```bash
+  gh repo clone DigitalLeadershipAG/flight-portable
+  ./flight-portable/install.sh ~/mein-flight-ordner
+  ```
+- **Als Plugin** (echte `/flight-portable:…`-Slash-Commands in Claude Code): `/plugin marketplace add DigitalLeadershipAG/flight-portable` → `/plugin install flight-portable@digitalleadership`.
 </details>
 
 ### Flight in allen Cowork-Ordnern (global, optional)
