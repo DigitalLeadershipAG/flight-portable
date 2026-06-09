@@ -46,6 +46,17 @@ Full step-by-step guide: **[INSTALL.md](INSTALL.md)**.
 
 > If the repo is later made public, the one-liner `curl -fsSL https://raw.githubusercontent.com/DigitalLeadershipAG/flight-portable/portable/install.sh | bash -s -- /path/to/folder` also works.
 
+### Alternative: install as a plugin (Claude Code — real slash commands)
+
+`install.sh` copies the skills into a folder, where they **auto-trigger** (no slash commands). If you instead want real namespaced commands like `/flight-portable:start`, install it as a **plugin** via the bundled marketplace (Claude Code CLI):
+
+```shell
+/plugin marketplace add DigitalLeadershipAG/flight-portable
+/plugin install flight-portable@digitalleadership
+```
+
+After reload you get `/flight-portable:start`, `/flight-portable:memo`, etc., plus a clean `/plugin` update path. (Slash commands are a Claude Code feature; **Cowork** support is unverified, and **Claude Desktop** has no plugins — there the uploaded skills auto-trigger.)
+
 ## The eight skills
 
 In **Claude Code (CLI)** these are real slash commands (`/flight-start`, `/flight-memo`, …). In **Cowork and Claude Desktop** there are no slash commands — the skills trigger automatically from their description, so you just describe what you want ("merke dir …", "start flight"). A German phrasebook of what to say is in **[SPRACHBEFEHLE.md](SPRACHBEFEHLE.md)**.

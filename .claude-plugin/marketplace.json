@@ -1,0 +1,13 @@
+{
+  "name": "digitalleadership",
+  "owner": {
+    "name": "Digital Leadership AG"
+  },
+  "plugins": [
+    {
+      "name": "flight-portable",
+      "source": "./",
+      "description": "Lightweight AI work companion (pilot): analyze documents, track tasks/memos, produce styled outputs (pptx/xlsx/docx). Portable build of tenzoki/flight for Claude Code, Cowork and Desktop."
+    }
+  ]
+}
