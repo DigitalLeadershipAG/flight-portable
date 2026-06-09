@@ -47,14 +47,14 @@ Full step-by-step guide: **[INSTALL.md](INSTALL.md)**.
 
 ### Alternative: install as a plugin (Claude Code — real slash commands)
 
-`install.sh` copies the skills into a folder, where they **auto-trigger** (no slash commands). If you instead want real namespaced commands like `/flight-portable:start`, install it as a **plugin** via the bundled marketplace (Claude Code CLI):
+`install.sh` copies the skills into a folder, where they **auto-trigger** (no slash commands). If you instead want real namespaced commands like `/flight-portable:start`, install it as a **plugin** via the bundled marketplace. This works in **Claude Code and Cowork**. Two steps — both are required:
 
 ```shell
-/plugin marketplace add DigitalLeadershipAG/flight-portable
-/plugin install flight-portable@digitalleadership
+/plugin marketplace add DigitalLeadershipAG/flight-portable   # 1) add the marketplace
+/plugin install flight-portable@digitalleadership             # 2) install the plugin (don't skip this!)
 ```
 
-After reload you get `/flight-portable:start`, `/flight-portable:memo`, etc., plus a clean `/plugin` update path. (Slash commands are a Claude Code feature; **Cowork** support is unverified, and **Claude Desktop** has no plugins — there the uploaded skills auto-trigger.)
+After a reload you get `/flight-portable:start`, `/flight-portable:memo`, etc., plus a clean `/plugin` update path. (In the Cowork GUI: adding the repo only does step 1 — you must then pick **flight-portable** and click **Install**.) **Claude Desktop** has no plugins — there the uploaded skills auto-trigger instead.
 
 ## The eight skills
 

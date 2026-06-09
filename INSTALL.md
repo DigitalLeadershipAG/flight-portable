@@ -28,7 +28,11 @@ Das kopiert die Skills und den `pilot`-Agenten nach `~/mein-flight-ordner/.claud
   gh repo clone DigitalLeadershipAG/flight-portable
   ./flight-portable/install.sh ~/mein-flight-ordner
   ```
-- **Als Plugin** (echte `/flight-portable:…`-Slash-Commands in Claude Code): `/plugin marketplace add DigitalLeadershipAG/flight-portable` → `/plugin install flight-portable@digitalleadership`.
+- **Als Plugin** (echte `/flight-portable:…`-Slash-Commands — funktioniert in **Claude Code und Cowork**). **Zwei Schritte, beide nötig:**
+  1. `/plugin marketplace add DigitalLeadershipAG/flight-portable` (fügt den Marketplace hinzu)
+  2. `/plugin install flight-portable@digitalleadership` (installiert das Plugin — **nicht vergessen!**)
+
+  Im Cowork-GUI: das Repo auszuwählen macht nur Schritt 1 — danach **flight-portable** in der Liste anklicken und **Install** drücken. Nach einem Reload erscheinen die Slash-Commands.
 </details>
 
 ### Flight in allen Cowork-Ordnern (global, optional)
